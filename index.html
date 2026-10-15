@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Website portofolio pribadi Yusuf Aliefiano.">
+  <title>Yusuf Aliefiano | Portofolio</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a2e;
+      --panel-light: #18233b;
+      --text: #eef3ff;
+      --muted: #aab6cf;
+      --accent: #62e6c5;
+      --accent-2: #7aa7ff;
+      --border: rgba(255,255,255,.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at 80% 0%, #18294a 0, transparent 32%), var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1080px, 90%); margin: auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(11,16,32,.88); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { font-size: 1.15rem; font-weight: 800; letter-spacing: .3px; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; list-style: none; color: var(--muted); font-size: .95rem; }
+    .nav-links a:hover { color: var(--accent); }
+    .hero { min-height: 78vh; display: grid; grid-template-columns: 1.25fr .75fr; gap: 50px; align-items: center; padding: 75px 0; }
+    .eyebrow { display: inline-block; color: var(--accent); background: rgba(98,230,197,.09); border: 1px solid rgba(98,230,197,.25); padding: 6px 12px; border-radius: 999px; font-size: .86rem; margin-bottom: 20px; }
+    h1 { font-size: clamp(2.5rem, 6vw, 4.7rem); line-height: 1.08; letter-spacing: -2px; margin-bottom: 20px; }
+    h1 span { color: var(--accent); }
+    .hero p { color: var(--muted); max-width: 620px; font-size: 1.06rem; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 28px; }
+    .btn { display: inline-block; padding: 12px 19px; border-radius: 10px; font-weight: 700; border: 1px solid var(--border); transition: .2s; }
+    .btn-primary { color: #061a17; background: var(--accent); border-color: var(--accent); }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .profile-card { padding: 28px; border-radius: 24px; border: 1px solid var(--border); background: linear-gradient(145deg, rgba(24,35,59,.95), rgba(18,26,46,.8)); box-shadow: 0 25px 70px rgba(0,0,0,.25); }
+    .avatar { width: 100%; aspect-ratio: 1 / 1; border-radius: 20px; display: grid; place-items: center; background: linear-gradient(135deg, #234b66, #26345f 60%, #173c3d); font-size: clamp(4rem, 10vw, 7rem); font-weight: 900; color: var(--accent); letter-spacing: -5px; }
+    .profile-card h2 { margin-top: 22px; font-size: 1.4rem; }
+    .profile-card p { color: var(--muted); font-size: .95rem; }
+    .mini-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tag { font-size: .8rem; padding: 5px 10px; border-radius: 999px; background: rgba(122,167,255,.12); color: #bcd0ff; border: 1px solid rgba(122,167,255,.18); }
+    section { padding: 78px 0; }
+    .section-head { margin-bottom: 30px; }
+    .section-head small { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+    h2.section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; margin-top: 8px; }
+    .section-intro { color: var(--muted); margin-top: 12px; max-width: 680px; }
+    .about-grid, .skills-grid, .projects-grid { display: grid; gap: 18px; }
+    .about-grid { grid-template-columns: 1.2fr .8fr; }
+    .card { background: rgba(18,26,46,.8); border: 1px solid var(--border); border-radius: 18px; padding: 25px; }
+    .card p { color: var(--muted); }
+    .facts { display: grid; gap: 13px; }
+    .fact { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    .fact:last-child { border-bottom: 0; padding-bottom: 0; }
+    .fact span:first-child { color: var(--muted); }
+    .fact span:last-child { text-align: right; font-weight: 700; }
+    .skills-grid { grid-template-columns: repeat(3, 1fr); }
+    .skill-card .icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .skill-card h3, .project-card h3 { margin-bottom: 8px; }
+    .skill-card p, .project-card p { color: var(--muted); font-size: .95rem; }
+    .projects-grid { grid-template-columns: repeat(3, 1fr); }
+    .project-top { min-height: 120px; border-radius: 12px; display: grid; place-items: center; font-size: 2.7rem; margin-bottom: 18px; background: linear-gradient(135deg, rgba(98,230,197,.16), rgba(122,167,255,.16)); }
+    .project-card .tag { display: inline-block; margin-top: 15px; }
+    .contact-box { display: flex; justify-content: space-between; align-items: center; gap: 25px; padding: 32px; border-radius: 22px; background: linear-gradient(120deg, rgba(98,230,197,.12), rgba(122,167,255,.12)); border: 1px solid var(--border); }
+    .contact-box p { color: var(--muted); margin-top: 8px; }
+    footer { border-top: 1px solid var(--border); padding: 25px 0; color: var(--muted); font-size: .9rem; text-align: center; }
+    @media (max-width: 760px) {
+      .nav-links { gap: 12px; font-size: .82rem; }
+      .hero { grid-template-columns: 1fr; gap: 30px; padding: 55px 0; }
+      .profile-card { max-width: 430px; }
+      .about-grid, .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+      .contact-box { align-items: flex-start; flex-direction: column; }
+      section { padding: 58px 0; }
+    }
+    @media (max-width: 420px) {
+      nav { align-items: flex-start; flex-direction: column; padding: 15px 0; }
+      .nav-links { flex-wrap: wrap; }
+      h1 { letter-spacing: -1px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a class="logo" href="#beranda">Yusuf<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#keahlian">Keahlian</a></li>
+        <li><a href="#proyek">Proyek</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="container hero" id="beranda">
+      <div>
+        <span class="eyebrow">PORTOFOLIO PRIBADI</span>
+        <h1>Halo, saya<br><span>Yusuf Aliefiano.</span></h1>
+        <p>Siswa bidang Teknik Jaringan Komputer dan Telekomunikasi (TJKT) yang tertarik dengan teknologi, jaringan komputer, dan pemrograman web. Saya senang belajar hal baru dan mencoba membuat proyek sederhana.</p>
+        <div class="buttons">
+          <a class="btn btn-primary" href="#proyek">Lihat Proyek Saya ↓</a>
+          <a class="btn btn-outline" href="#kontak">Hubungi Saya</a>
+        </div>
+      </div>
+      <aside class="profile-card">
+        <div class="avatar" aria-label="Inisial YA">YA</div>
+        <h2>Yusuf Aliefiano</h2>
+        <p>Pelajar • TJKT</p>
+        <div class="mini-tags">
+          <span class="tag">Networking</span>
+          <span class="tag">HTML & CSS</span>
+          <span class="tag">Arduino</span>
+        </div>
+      </aside>
+    </section>
+
+    <section id="tentang">
+      <div class="container">
+        <div class="section-head">
+          <small>Tentang Saya</small>
+          <h2 class="section-title">Kenalan lebih dekat</h2>
+          <p class="section-intro">Saya sedang mengembangkan kemampuan di bidang teknologi informasi, khususnya jaringan komputer dan pembuatan website.</p>
+        </div>
+        <div class="about-grid">
+          <div class="card">
+            <h3>Profil Singkat</h3>
+            <p>Saya adalah pelajar yang ingin terus meningkatkan kemampuan melalui pembelajaran dan praktik. Saya tertarik memahami cara kerja jaringan, perangkat komputer, mikrokontroler, serta cara membangun website yang rapi dan mudah digunakan.</p>
+          </div>
+          <div class="card facts">
+            <div class="fact"><span>Nama</span><span>Yusuf Aliefiano</span></div>
+            <div class="fact"><span>Bidang</span><span>Teknologi & TJKT</span></div>
+            <div class="fact"><span>Fokus belajar</span><span>Jaringan dan Web</span></div>
+            <div class="fact"><span>Tujuan</span><span>Terus berkembang</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="keahlian">
+      <div class="container">
+        <div class="section-head">
+          <small>Keahlian</small>
+          <h2 class="section-title">Hal yang sedang saya pelajari</h2>
+          <p class="section-intro">Bagian ini bisa kamu ubah sesuai kemampuan yang benar-benar kamu kuasai.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="card skill-card">
+            <div class="icon">🌐</div>
+            <h3>Jaringan Komputer</h3>
+            <p>Mempelajari dasar jaringan, IP address, konfigurasi perangkat, dan troubleshooting koneksi.</p>
+          </article>
+          <article class="card skill-card">
+            <div class="icon">💻</div>
+            <h3>Web Development</h3>
+            <p>Mempelajari HTML dan CSS untuk membuat halaman website yang responsif.</p>
+          </article>
+          <article class="card skill-card">
+            <div class="icon">🔌</div>
+            <h3>Mikrokontroler</h3>
+            <p>Mengenal Arduino, sensor, LED, dan pemrograman dasar untuk proyek elektronik.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyek">
+      <div class="container">
+        <div class="section-head">
+          <small>Proyek</small>
+          <h2 class="section-title">Proyek pilihan</h2>
+          <p class="section-intro">Contoh proyek untuk memulai. Sesuaikan deskripsi dan tampilkan proyek yang sudah pernah kamu buat.</p>
+        </div>
+        <div class="projects-grid">
+          <article class="card project-card">
+            <div class="project-top">🖥️</div>
+            <h3>Website Portofolio</h3>
+            <p>Website pribadi untuk memperkenalkan diri, menampilkan keahlian, dan mengumpulkan proyek.</p>
+            <span class="tag">HTML • CSS</span>
+          </article>
+          <article class="card project-card">
+            <div class="project-top">💡</div>
+            <h3>Kontrol LED Arduino</h3>
+            <p>Proyek latihan mikrokontroler untuk mengatur LED menggunakan program Arduino sederhana.</p>
+            <span class="tag">Arduino</span>
+          </article>
+          <article class="card project-card">
+            <div class="project-top">📡</div>
+            <h3>Praktik Jaringan</h3>
+            <p>Latihan dasar konfigurasi jaringan, pengalamatan IP, dan pengujian koneksi antarperangkat.</p>
+            <span class="tag">Networking</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontak">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <small style="color:var(--accent);font-weight:700;letter-spacing:2px;">KONTAK</small>
+            <h2 class="section-title">Mari terhubung!</h2>
+            <p>Tambahkan email atau akun media sosialmu agar orang lain bisa menghubungi kamu.</p>
+          </div>
+          <div class="buttons" style="margin-top:0">
+            <!-- Ganti alamat email di bawah dengan email milikmu -->
+            <a class="btn btn-primary" href="mailto:emailkamu@example.com">Kirim Email ↗</a>
+            <a class="btn btn-outline" href="#beranda">Kembali ke atas ↑</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Yusuf Aliefiano. Dibuat dengan HTML & CSS.</div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+  </html>
+  
