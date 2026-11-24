@@ -1,235 +1,1652 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Website portofolio pribadi Yusuf Aliefiano.">
-  <title>Yusuf Aliefiano | Portofolio</title>
-  <style>
-    :root {
-      --bg: #0b1020;
-      --panel: #121a2e;
-      --panel-light: #18233b;
-      --text: #eef3ff;
-      --muted: #aab6cf;
-      --accent: #62e6c5;
-      --accent-2: #7aa7ff;
-      --border: rgba(255,255,255,.1);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: radial-gradient(circle at 80% 0%, #18294a 0, transparent 32%), var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-    }
-    a { color: inherit; text-decoration: none; }
-    .container { width: min(1080px, 90%); margin: auto; }
-    header {
-      position: sticky; top: 0; z-index: 10;
-      background: rgba(11,16,32,.88); backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-    nav { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .logo { font-size: 1.15rem; font-weight: 800; letter-spacing: .3px; }
-    .logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 24px; list-style: none; color: var(--muted); font-size: .95rem; }
-    .nav-links a:hover { color: var(--accent); }
-    .hero { min-height: 78vh; display: grid; grid-template-columns: 1.25fr .75fr; gap: 50px; align-items: center; padding: 75px 0; }
-    .eyebrow { display: inline-block; color: var(--accent); background: rgba(98,230,197,.09); border: 1px solid rgba(98,230,197,.25); padding: 6px 12px; border-radius: 999px; font-size: .86rem; margin-bottom: 20px; }
-    h1 { font-size: clamp(2.5rem, 6vw, 4.7rem); line-height: 1.08; letter-spacing: -2px; margin-bottom: 20px; }
-    h1 span { color: var(--accent); }
-    .hero p { color: var(--muted); max-width: 620px; font-size: 1.06rem; }
-    .buttons { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 28px; }
-    .btn { display: inline-block; padding: 12px 19px; border-radius: 10px; font-weight: 700; border: 1px solid var(--border); transition: .2s; }
-    .btn-primary { color: #061a17; background: var(--accent); border-color: var(--accent); }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-    .profile-card { padding: 28px; border-radius: 24px; border: 1px solid var(--border); background: linear-gradient(145deg, rgba(24,35,59,.95), rgba(18,26,46,.8)); box-shadow: 0 25px 70px rgba(0,0,0,.25); }
-    .avatar { width: 100%; aspect-ratio: 1 / 1; border-radius: 20px; display: grid; place-items: center; background: linear-gradient(135deg, #234b66, #26345f 60%, #173c3d); font-size: clamp(4rem, 10vw, 7rem); font-weight: 900; color: var(--accent); letter-spacing: -5px; }
-    .profile-card h2 { margin-top: 22px; font-size: 1.4rem; }
-    .profile-card p { color: var(--muted); font-size: .95rem; }
-    .mini-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-    .tag { font-size: .8rem; padding: 5px 10px; border-radius: 999px; background: rgba(122,167,255,.12); color: #bcd0ff; border: 1px solid rgba(122,167,255,.18); }
-    section { padding: 78px 0; }
-    .section-head { margin-bottom: 30px; }
-    .section-head small { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
-    h2.section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; margin-top: 8px; }
-    .section-intro { color: var(--muted); margin-top: 12px; max-width: 680px; }
-    .about-grid, .skills-grid, .projects-grid { display: grid; gap: 18px; }
-    .about-grid { grid-template-columns: 1.2fr .8fr; }
-    .card { background: rgba(18,26,46,.8); border: 1px solid var(--border); border-radius: 18px; padding: 25px; }
-    .card p { color: var(--muted); }
-    .facts { display: grid; gap: 13px; }
-    .fact { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-    .fact:last-child { border-bottom: 0; padding-bottom: 0; }
-    .fact span:first-child { color: var(--muted); }
-    .fact span:last-child { text-align: right; font-weight: 700; }
-    .skills-grid { grid-template-columns: repeat(3, 1fr); }
-    .skill-card .icon { font-size: 1.8rem; margin-bottom: 12px; }
-    .skill-card h3, .project-card h3 { margin-bottom: 8px; }
-    .skill-card p, .project-card p { color: var(--muted); font-size: .95rem; }
-    .projects-grid { grid-template-columns: repeat(3, 1fr); }
-    .project-top { min-height: 120px; border-radius: 12px; display: grid; place-items: center; font-size: 2.7rem; margin-bottom: 18px; background: linear-gradient(135deg, rgba(98,230,197,.16), rgba(122,167,255,.16)); }
-    .project-card .tag { display: inline-block; margin-top: 15px; }
-    .contact-box { display: flex; justify-content: space-between; align-items: center; gap: 25px; padding: 32px; border-radius: 22px; background: linear-gradient(120deg, rgba(98,230,197,.12), rgba(122,167,255,.12)); border: 1px solid var(--border); }
-    .contact-box p { color: var(--muted); margin-top: 8px; }
-    footer { border-top: 1px solid var(--border); padding: 25px 0; color: var(--muted); font-size: .9rem; text-align: center; }
-    @media (max-width: 760px) {
-      .nav-links { gap: 12px; font-size: .82rem; }
-      .hero { grid-template-columns: 1fr; gap: 30px; padding: 55px 0; }
-      .profile-card { max-width: 430px; }
-      .about-grid, .skills-grid, .projects-grid { grid-template-columns: 1fr; }
-      .contact-box { align-items: flex-start; flex-direction: column; }
-      section { padding: 58px 0; }
-    }
-    @media (max-width: 420px) {
-      nav { align-items: flex-start; flex-direction: column; padding: 15px 0; }
-      .nav-links { flex-wrap: wrap; }
-      h1 { letter-spacing: -1px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Website portofolio pribadi Yusuf Aliefiano.">
+<title id="pageTitle">Yusuf Aliefiano | Portofolio</title>
+
+<style>
+:root {
+  --bg: #070b14;
+  --header-bg: rgba(7, 11, 20, 0.85);
+  --dropdown-bg: rgba(12, 18, 32, 0.96);
+  --panel: rgba(15, 22, 38, 0.78);
+  --text: #eef3ff;
+  --muted: #9eb0cc;
+  --accent: #62e6c5;
+  --accent-text: #051714;
+  --accent-2: #5b8cff;
+  --border: rgba(255, 255, 255, 0.09);
+  --grid-line: rgba(98, 230, 197, 0.04);
+  --glow-1: rgba(98, 230, 197, 0.11);
+  --glow-2: rgba(91, 140, 255, 0.11);
+  --hero-gradient: linear-gradient(90deg, #62e6c5, #8cb4ff);
+  --tag-bg: rgba(91, 140, 255, 0.14);
+  --tag-border: rgba(91, 140, 255, 0.25);
+  --tag-text: #bcd3ff;
+  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* VARIABEL MODE TERANG */
+[data-theme="light"] {
+  --bg: #f4f7fc;
+  --header-bg: rgba(244, 247, 252, 0.88);
+  --dropdown-bg: rgba(255, 255, 255, 0.97);
+  --panel: rgba(255, 255, 255, 0.88);
+  --text: #0f172a;
+  --muted: #475569;
+  --accent: #0d9488;
+  --accent-text: #ffffff;
+  --accent-2: #2563eb;
+  --border: rgba(15, 23, 42, 0.1);
+  --grid-line: rgba(13, 148, 136, 0.06);
+  --glow-1: rgba(13, 148, 136, 0.12);
+  --glow-2: rgba(37, 99, 235, 0.1);
+  --hero-gradient: linear-gradient(90deg, #0d9488, #2563eb);
+  --tag-bg: rgba(37, 99, 235, 0.09);
+  --tag-border: rgba(37, 99, 235, 0.22);
+  --tag-text: #1d4ed8;
+  --shadow-card: 0 14px 36px rgba(15, 23, 42, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.7;
+  background-color: var(--bg);
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* BACKGROUND CYBER-GRID HALUS */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 35%, black 35%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 35%, black 35%, transparent 85%);
+}
+
+/* CAHAYA AMBIENT BERGERAK DI LATAR BELAKANG */
+.bg-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 15%, var(--glow-1), transparent 38%),
+    radial-gradient(circle at 85% 75%, var(--glow-2), transparent 42%);
+  animation: pulseGlow 9s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(1); opacity: 0.85; }
+  100% { transform: scale(1.08); opacity: 1; }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1080px, 90%);
+  margin: auto;
+}
+
+/* NAVBAR, THEME TOGGLE & HAMBURGER MENU */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--header-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.35s ease, border-color 0.35s ease;
+}
+
+nav {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Tombol Mode Terang / Gelap */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: rgba(128, 128, 128, 0.08);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.25s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  background: rgba(98, 230, 197, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Tombol Garis Tiga */
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  background: rgba(128, 128, 128, 0.08);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.menu-toggle:hover {
+  border-color: var(--accent);
+  background: rgba(98, 230, 197, 0.12);
+}
+
+.menu-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
+}
+
+.menu-toggle:hover span {
+  background: var(--accent);
+}
+
+/* Animasi Garis Tiga jadi Silang (X) saat aktif */
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background: var(--accent);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background: var(--accent);
+}
+
+/* Dropdown Navigasi */
+.nav-links {
+  position: absolute;
+  top: 78px;
+  right: 0;
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+  background: var(--dropdown-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s, background 0.35s ease;
+}
+
+.nav-links.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-links a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  transition: background 0.25s ease, color 0.25s ease, padding-left 0.25s ease;
+}
+
+.nav-links a:hover {
+  background: rgba(98, 230, 197, 0.12);
+  color: var(--accent);
+  padding-left: 18px;
+}
+
+/* HERO */
+.hero {
+  min-height: 82vh;
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap: 50px;
+  align-items: center;
+  padding: 75px 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  background: rgba(98, 230, 197, 0.1);
+  border: 1px solid rgba(98, 230, 197, 0.3);
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  animation: fadeDown 0.8s ease forwards;
+}
+
+.dot-live {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent);
+  animation: blink 1.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4.6rem);
+  line-height: 1.12;
+  margin-bottom: 20px;
+  animation: fadeUp 0.9s ease forwards;
+}
+
+h1 span {
+  background: var(--hero-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  color: var(--muted);
+  max-width: 600px;
+  font-size: 1.05rem;
+  animation: fadeUp 1.05s ease forwards;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+  animation: fadeUp 1.2s ease forwards;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: bold;
+  color: var(--text);
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  color: var(--accent-text);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 130%;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(13, 148, 136, 0.22);
+}
+
+.btn-outline {
+  color: var(--text);
+  background: var(--panel);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* PROFILE CARD DENGAN ANIMASI FLOATING */
+.profile-card {
+  padding: 28px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-card);
+  animation: floatCard 5s ease-in-out infinite;
+  transition: border-color 0.4s, background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.profile-card:hover {
+  border-color: var(--accent);
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.profile-card p {
+  color: var(--muted);
+}
+
+.mini-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.tag {
+  font-size: 0.8rem;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: var(--tag-bg);
+  border: 1px solid var(--tag-border);
+  color: var(--tag-text);
+  font-weight: 500;
+}
+
+/* SECTION */
+section:not(.hero) {
+  padding: 82px 0;
+}
+
+.section-head {
+  margin-bottom: 34px;
+}
+
+.section-head small {
+  color: var(--accent);
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-top: 8px;
+}
+
+.section-intro {
+  color: var(--muted);
+  margin-top: 12px;
+  max-width: 680px;
+}
+
+/* CARDS */
+.card {
+  background: var(--panel);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: var(--shadow-card);
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card p {
+  color: var(--muted);
+}
+
+.about-grid,
+.skills-grid,
+.projects-grid {
+  display: grid;
+  gap: 22px;
+}
+
+.about-grid {
+  grid-template-columns: 1.2fr .8fr;
+}
+
+.facts {
+  display: grid;
+  gap: 14px;
+}
+
+.fact {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.fact:last-child {
+  border: 0;
+  padding-bottom: 0;
+}
+
+.fact span:first-child {
+  color: var(--muted);
+}
+
+.fact span:last-child {
+  text-align: right;
+  font-weight: bold;
+}
+
+/* SKILLS & PROJECTS */
+.skills-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.projects-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.skill-card,
+.project-card {
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.project-card.clickable {
+  cursor: pointer;
+}
+
+.skill-card:hover,
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent);
+}
+
+.skill-card .icon {
+  font-size: 2.1rem;
+  margin-bottom: 14px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover .icon {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.skill-card h3,
+.project-card h3 {
+  margin-bottom: 8px;
+}
+
+.project-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* GAMBAR REAL PROYEK DENGAN EFEK ZOOM */
+.project-thumb {
+  width: 100%;
+  height: 210px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  border: 1px solid var(--border);
+  background: #0d1526;
+}
+
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-thumb img {
+  transform: scale(1.08);
+}
+
+.project-card .tag {
+  display: inline-block;
+  margin-top: 16px;
+}
+
+/* HALAMAN DETAIL PROYEK (ARDUINO & MIKROTIK) */
+.detail-page {
+  padding: 52px 0 90px;
+}
+
+.detail-hero {
+  margin-bottom: 34px;
+}
+
+.detail-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  margin-top: 16px;
+  margin-bottom: 14px;
+  animation: none;
+}
+
+.detail-hero .lead {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 780px;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.meta-card h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.meta-card p {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.detail-two-col {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 22px;
+  margin-bottom: 28px;
+}
+
+.detail-block {
+  margin-bottom: 28px;
+}
+
+.detail-block h2 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+.check-list {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.check-list li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--muted);
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.process-list {
+  display: grid;
+  gap: 16px;
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.step-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  background: var(--tag-bg);
+  border: 1px solid var(--tag-border);
+  color: var(--accent);
+}
+
+.process-step h3 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.qa-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.qa-grid.single-col {
+  grid-template-columns: 1fr;
+}
+
+.qa-item h3 {
+  font-size: 1.08rem;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.qa-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+/* TOMBOL NAVIGASI BAWAH (KIRI BAWAH KEMBALI & KANAN BAWAH NYAMBUNG PROYEK) */
+.detail-bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 34px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+/* CONTACT */
+.contact-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 36px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--glow-1), var(--glow-2));
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.contact-box p {
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 0;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.92rem;
+}
+
+/* KEYFRAMES & REVEAL ANIMATION */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px) {
+  .meta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width:760px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .about-grid,
+  .skills-grid,
+  .projects-grid,
+  .detail-two-col,
+  .qa-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-box {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media(max-width:480px) {
+  .meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-bottom-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .detail-bottom-nav .btn {
+    justify-content: center;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <nav class="container">
-      <a class="logo" href="#beranda">Yusuf<span>.</span></a>
-      <ul class="nav-links">
-        <li><a href="#tentang">Tentang</a></li>
-        <li><a href="#keahlian">Keahlian</a></li>
-        <li><a href="#proyek">Proyek</a></li>
-        <li><a href="#kontak">Kontak</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <section class="container hero" id="beranda">
-      <div>
-        <span class="eyebrow">PORTOFOLIO PRIBADI</span>
-        <h1>Halo, saya<br><span>Yusuf Aliefiano.</span></h1>
-        <p>Siswa bidang Teknik Jaringan Komputer dan Telekomunikasi (TJKT) yang tertarik dengan teknologi, jaringan komputer, dan pemrograman web. Saya senang belajar hal baru dan mencoba membuat proyek sederhana.</p>
-        <div class="buttons">
-          <a class="btn btn-primary" href="#proyek">Lihat Proyek Saya ↓</a>
-          <a class="btn btn-outline" href="#kontak">Hubungi Saya</a>
-        </div>
+<!-- LAYER BACKGROUND -->
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+
+<header>
+  <nav class="container">
+    <a class="logo" href="#beranda" data-nav="home">Yusuf<span>.</span></a>
+
+    <div class="nav-actions">
+      <!-- TOMBOL MODE TERANG / GELAP -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Ganti mode tampilan" title="Ganti Tema">
+        ☀️
+      </button>
+
+      <!-- TOMBOL GARIS TIGA -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu navigasi" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#tentang" data-section="#tentang">Tentang</a></li>
+      <li><a href="#keahlian" data-section="#keahlian">Keahlian</a></li>
+      <li><a href="#proyek" data-section="#proyek">Proyek</a></li>
+      <li><a href="#kontrol-led-arduino" data-page="arduino">Kontrol LED Arduino</a></li>
+      <li><a href="#konfigurasi-mikrotik" data-page="mikrotik">Konfigurasi MikroTik</a></li>
+      <li><a href="#kontak" data-section="#kontak">Kontak</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<!-- ==================== HALAMAN UTAMA PORTOFOLIO ==================== -->
+<div id="homeView">
+
+  <!-- BERANDA -->
+  <section class="container hero" id="beranda">
+    <div>
+      <span class="eyebrow">
+        <span class="dot-live"></span>
+        PORTOFOLIO PRIBADI
+      </span>
+
+      <h1>
+        Halo, saya<br>
+        <span>Yusuf Aliefiano.</span>
+      </h1>
+
+      <p>
+        Siswa bidang Teknik Jaringan Komputer dan Telekomunikasi
+        (TJKT) yang tertarik dengan teknologi, jaringan komputer,
+        dan pemrograman web.
+      </p>
+
+      <div class="buttons">
+        <a class="btn btn-primary" href="#proyek">
+          Lihat Proyek Saya ↓
+        </a>
+
+        <a class="btn btn-outline" href="#kontak">
+          Hubungi Saya
+        </a>
       </div>
-      <aside class="profile-card">
-        <div class="avatar" aria-label="Inisial YA">YA</div>
-        <h2>Yusuf Aliefiano</h2>
-        <p>Pelajar • TJKT</p>
-        <div class="mini-tags">
-          <span class="tag">Networking</span>
-          <span class="tag">HTML & CSS</span>
-          <span class="tag">Arduino</span>
-        </div>
-      </aside>
-    </section>
+    </div>
 
-    <section id="tentang">
-      <div class="container">
-        <div class="section-head">
-          <small>Tentang Saya</small>
-          <h2 class="section-title">Kenalan lebih dekat</h2>
-          <p class="section-intro">Saya sedang mengembangkan kemampuan di bidang teknologi informasi, khususnya jaringan komputer dan pembuatan website.</p>
+    <aside class="profile-card">
+      <h2>Yusuf Aliefiano</h2>
+      <p>Pelajar • TJKT</p>
+
+      <div class="mini-tags">
+        <span class="tag">Networking</span>
+        <span class="tag">HTML & CSS</span>
+        <span class="tag">Arduino</span>
+      </div>
+    </aside>
+  </section>
+
+  <!-- TENTANG -->
+  <section id="tentang">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <small>TENTANG SAYA</small>
+        <h2 class="section-title">Kenalan lebih dekat</h2>
+        <p class="section-intro">
+          Saya sedang mengembangkan kemampuan di bidang teknologi
+          informasi, khususnya jaringan komputer dan website.
+        </p>
+      </div>
+
+      <div class="about-grid">
+
+        <div class="card reveal">
+          <h3>Profil Singkat</h3>
+          <p style="margin-top: 10px;">
+            Saya adalah pelajar jurusan Teknik Jaringan Komputer
+            dan Telekomunikasi (TJKT). Saya tertarik mempelajari
+            jaringan komputer, perangkat keras, mikrokontroler,
+            dan pemrograman website.
+          </p>
         </div>
-        <div class="about-grid">
-          <div class="card">
-            <h3>Profil Singkat</h3>
-            <p>Saya adalah pelajar yang ingin terus meningkatkan kemampuan melalui pembelajaran dan praktik. Saya tertarik memahami cara kerja jaringan, perangkat komputer, mikrokontroler, serta cara membangun website yang rapi dan mudah digunakan.</p>
+
+        <div class="card facts reveal">
+          <div class="fact">
+            <span>Nama</span>
+            <span>Yusuf Aliefiano</span>
           </div>
-          <div class="card facts">
-            <div class="fact"><span>Nama</span><span>Yusuf Aliefiano</span></div>
-            <div class="fact"><span>Bidang</span><span>Teknologi & TJKT</span></div>
-            <div class="fact"><span>Fokus belajar</span><span>Jaringan dan Web</span></div>
-            <div class="fact"><span>Tujuan</span><span>Terus berkembang</span></div>
+
+          <div class="fact">
+            <span>Bidang</span>
+            <span>TJKT</span>
+          </div>
+
+          <div class="fact">
+            <span>Fokus belajar</span>
+            <span>Jaringan dan Web</span>
+          </div>
+
+          <div class="fact">
+            <span>Tujuan</span>
+            <span>Terus berkembang</span>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section id="keahlian">
-      <div class="container">
-        <div class="section-head">
-          <small>Keahlian</small>
-          <h2 class="section-title">Hal yang sedang saya pelajari</h2>
-          <p class="section-intro">Bagian ini bisa kamu ubah sesuai kemampuan yang benar-benar kamu kuasai.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEAHLIAN -->
+  <section id="keahlian">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <small>KEAHLIAN</small>
+        <h2 class="section-title">Hal yang sedang saya pelajari</h2>
+        <p class="section-intro">
+          Beberapa bidang yang sedang saya pelajari dan kembangkan.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+
+        <article class="card skill-card reveal">
+          <div class="icon">🌐</div>
+          <h3>Jaringan Komputer</h3>
+          <p>
+            Mempelajari IP Address, konfigurasi perangkat,
+            dan troubleshooting jaringan.
+          </p>
+        </article>
+
+        <article class="card skill-card reveal">
+          <div class="icon">💻</div>
+          <h3>Web Development</h3>
+          <p>
+            Mempelajari HTML dan CSS untuk membuat
+            halaman website.
+          </p>
+        </article>
+
+        <article class="card skill-card reveal">
+          <div class="icon">🔌</div>
+          <h3>Mikrokontroler</h3>
+          <p>
+            Mengenal Arduino, sensor HC-SR04,
+            dan pemrograman LED.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYEK -->
+  <section id="proyek">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <small>PROYEK</small>
+        <h2 class="section-title">Proyek pilihan</h2>
+        <p class="section-intro">
+          Beberapa proyek dan praktik yang pernah saya kerjakan.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- PROYEK 1: ARDUINO -->
+        <article class="card project-card clickable reveal" id="cardArduino" tabindex="0" role="button" aria-label="Buka halaman detail Kontrol LED Arduino">
+          <div class="project-thumb">
+            <img
+              src="https://images.unsplash.com/photo-1553406830-ef2513450d76?auto=format&fit=crop&w=800&q=80"
+              alt="Papan Mikrokontroler Arduino"
+              loading="lazy"
+            >
+          </div>
+
+          <h3>Kontrol LED Arduino</h3>
+
+          <p>
+            Proyek sensor jarak berbasis Arduino yang membaca jarak objek menggunakan sensor ultrasonik HC-SR04, lalu menampilkan hasilnya secara real-time.
+          </p>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 16px;">
+            <span class="tag" style="margin-top: 0;">Arduino • HC-SR04</span>
+            <a href="#kontrol-led-arduino" class="project-link-btn" style="margin-top: 0;">Buka Detail →</a>
+          </div>
+        </article>
+
+        <!-- PROYEK 2: KONFIGURASI MIKROTIK -->
+        <article class="card project-card clickable reveal" id="cardMikrotik" tabindex="0" role="button" aria-label="Buka halaman detail Konfigurasi MikroTik">
+          <div class="project-thumb">
+            <img
+              src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80"
+              alt="Perangkat Server dan Kabel Jaringan MikroTik"
+              loading="lazy"
+            >
+          </div>
+
+          <h3>Konfigurasi MikroTik</h3>
+
+          <p>
+            Konfigurasi jaringan dan routing menggunakan router MikroTik untuk kebutuhan lab jaringan sekolah, mencakup pengaturan IP, firewall dasar, dan manajemen bandwidth antar client.
+          </p>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 16px;">
+            <span class="tag" style="margin-top: 0;">Networking • MikroTik</span>
+            <a href="#konfigurasi-mikrotik" class="project-link-btn" style="margin-top: 0;">Buka Detail →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAK -->
+  <section id="kontak">
+    <div class="container">
+
+      <div class="contact-box reveal">
+
+        <div>
+          <small style="color:var(--accent);letter-spacing:2px;font-weight:bold;">
+            KONTAK
+          </small>
+
+          <h2 class="section-title">Saran</h2>
+
+          <p>
+            Silahkan hubungi saya langsung melalui whatsapp
+          </p>
         </div>
-        <div class="skills-grid">
-          <article class="card skill-card">
-            <div class="icon">🌐</div>
-            <h3>Jaringan Komputer</h3>
-            <p>Mempelajari dasar jaringan, IP address, konfigurasi perangkat, dan troubleshooting koneksi.</p>
-          </article>
-          <article class="card skill-card">
-            <div class="icon">💻</div>
-            <h3>Web Development</h3>
-            <p>Mempelajari HTML dan CSS untuk membuat halaman website yang responsif.</p>
-          </article>
-          <article class="card skill-card">
-            <div class="icon">🔌</div>
-            <h3>Mikrokontroler</h3>
-            <p>Mengenal Arduino, sensor, LED, dan pemrograman dasar untuk proyek elektronik.</p>
-          </article>
+
+        <div class="buttons" style="margin-top:0">
+
+          <a class="btn btn-primary"
+             href="https://wa.me/6281585763547"
+             target="_blank"
+             rel="noopener noreferrer">
+            Hubungi WhatsApp ↗
+          </a>
+
+          <a class="btn btn-outline" href="#beranda">
+            Kembali ke atas ↑
+          </a>
+
         </div>
       </div>
-    </section>
 
-    <section id="proyek">
-      <div class="container">
-        <div class="section-head">
-          <small>Proyek</small>
-          <h2 class="section-title">Proyek pilihan</h2>
-          <p class="section-intro">Contoh proyek untuk memulai. Sesuaikan deskripsi dan tampilkan proyek yang sudah pernah kamu buat.</p>
-        </div>
-        <div class="projects-grid">
-          <article class="card project-card">
-            <div class="project-top">🖥️</div>
-            <h3>Website Portofolio</h3>
-            <p>Website pribadi untuk memperkenalkan diri, menampilkan keahlian, dan mengumpulkan proyek.</p>
-            <span class="tag">HTML • CSS</span>
-          </article>
-          <article class="card project-card">
-            <div class="project-top">💡</div>
-            <h3>Kontrol LED Arduino</h3>
-            <p>Proyek latihan mikrokontroler untuk mengatur LED menggunakan program Arduino sederhana.</p>
-            <span class="tag">Arduino</span>
-          </article>
-          <article class="card project-card">
-            <div class="project-top">📡</div>
-            <h3>Praktik Jaringan</h3>
-            <p>Latihan dasar konfigurasi jaringan, pengalamatan IP, dan pengujian koneksi antarperangkat.</p>
-            <span class="tag">Networking</span>
-          </article>
-        </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ==================== HALAMAN KHUSUS KONTROL LED ARDUINO ==================== -->
+<div id="arduinoView" class="detail-page hidden">
+  <div class="container">
+
+    <div class="detail-hero">
+      <button type="button" class="btn btn-outline back-to-home-btn">
+        ← Kembali ke Portofolio
+      </button>
+
+      <h1>Kontrol LED Arduino</h1>
+      <p class="lead">
+        Proyek sensor jarak berbasis Arduino yang membaca jarak objek menggunakan sensor ultrasonik HC-SR04, lalu menampilkan hasilnya secara real-time.
+      </p>
+    </div>
+
+    <!-- METADATA PROYEK -->
+    <div class="meta-grid">
+      <div class="card meta-card">
+        <h4>Peran</h4>
+        <p>Perakitan & Pemrograman</p>
       </div>
-    </section>
 
-    <section id="kontak">
-      <div class="container">
-        <div class="contact-box">
+      <div class="card meta-card">
+        <h4>Durasi</h4>
+        <p>1 Hari</p>
+      </div>
+
+      <div class="card meta-card">
+        <h4>Tahun</h4>
+        <p>2026</p>
+      </div>
+
+      <div class="card meta-card">
+        <h4>Status</h4>
+        <p>Selesai</p>
+      </div>
+    </div>
+
+    <!-- TENTANG PROYEK & YANG DIKERJAKAN -->
+    <div class="detail-two-col">
+      <div class="card">
+        <h2>Tentang Proyek</h2>
+        <p style="margin-bottom: 14px;">
+          Sensor ultrasonik HC-SR04 memancarkan gelombang suara dan menghitung waktu pantulannya untuk mengetahui jarak sebuah objek.
+        </p>
+        <p>
+          Arduino membaca data tersebut, mengubahnya menjadi jarak (cm), lalu menampilkannya secara real-time sehingga perubahan jarak langsung terlihat.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Yang Dikerjakan</h2>
+        <ul class="check-list">
+          <li>Pengukuran jarak objek secara real-time</li>
+          <li>Rangkaian sederhana dan mudah dikembangkan</li>
+          <li>Program Arduino (C++) yang rapi dan dikomentari</li>
+          <li>Bisa dikembangkan jadi alarm jarak atau sensor parkir</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PROSES PENGERJAAN -->
+    <div class="card detail-block">
+      <h2>Proses Pengerjaan</h2>
+      <div class="process-list">
+        <div class="process-step">
+          <div class="step-num">1</div>
           <div>
-            <small style="color:var(--accent);font-weight:700;letter-spacing:2px;">KONTAK</small>
-            <h2 class="section-title">Mari terhubung!</h2>
-            <p>Tambahkan email atau akun media sosialmu agar orang lain bisa menghubungi kamu.</p>
+            <h3>Merakit rangkaian</h3>
+            <p>Menghubungkan pin VCC, GND, Trig, dan Echo sensor ke Arduino.</p>
           </div>
-          <div class="buttons" style="margin-top:0">
-            <!-- Ganti alamat email di bawah dengan email milikmu -->
-            <a class="btn btn-primary" href="mailto:emailkamu@example.com">Kirim Email ↗</a>
-            <a class="btn btn-outline" href="#beranda">Kembali ke atas ↑</a>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Menulis program</h3>
+            <p>Mengirim sinyal trigger, membaca durasi echo, lalu menghitung jarak.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Menampilkan hasil</h3>
+            <p>Menampilkan nilai jarak secara real-time dan memeriksa ketelitiannya.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">4</div>
+          <div>
+            <h3>Kalibrasi & uji</h3>
+            <p>Membandingkan hasil sensor dengan pengukuran penggaris pada beberapa jarak.</p>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
 
-  <footer>
-    <div class="container">© <span id="year"></span> Yusuf Aliefiano. Dibuat dengan HTML & CSS.</div>
-  </footer>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+    <!-- TANTANGAN & SOLUSI -->
+    <div class="detail-block">
+      <h2 style="margin-bottom: 16px;">Tantangan & Solusi</h2>
+      <div class="qa-grid single-col">
+        <div class="card qa-item">
+          <h3>Pembacaan jarak sering loncat-loncat</h3>
+          <span class="qa-label">Solusi</span>
+          <p>Ditambah pembacaan berulang dan perataan nilai supaya hasil lebih stabil.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HASIL, YANG DIPELAJARI & TOOLS -->
+    <div class="detail-two-col">
+      <div class="card">
+        <h2>Hasil</h2>
+        <ul class="check-list">
+          <li>Sensor berhasil membaca jarak dengan cukup akurat</li>
+          <li>Pemahaman dasar tentang sensor, pin digital, dan pemrograman Arduino</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Yang Dipelajari</h2>
+        <ul class="check-list">
+          <li>Cara kerja sensor ultrasonik</li>
+          <li>Dasar pemrograman Arduino (C++)</li>
+          <li>Merangkai komponen elektronik dengan benar</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Tools & Teknologi</h2>
+      <div class="mini-tags" style="margin-top: 12px;">
+        <span class="tag">Arduino</span>
+        <span class="tag">HC-SR04</span>
+        <span class="tag">C++</span>
+        <span class="tag">Breadboard</span>
+      </div>
+    </div>
+
+    <!-- NAVIGASI KIRI BAWAH & KANAN BAWAH -->
+    <div class="detail-bottom-nav">
+      <button type="button" class="btn btn-outline back-to-home-btn">
+        ← Kembali ke Portofolio
+      </button>
+
+      <a href="#konfigurasi-mikrotik" class="btn btn-primary">
+        Konfigurasi MikroTik →
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== HALAMAN KHUSUS KONFIGURASI MIKROTIK ==================== -->
+<div id="mikrotikView" class="detail-page hidden">
+  <div class="container">
+
+    <div class="detail-hero">
+      <button type="button" class="btn btn-outline back-to-home-btn">
+        ← Kembali ke Portofolio
+      </button>
+
+      <h1>Konfigurasi MikroTik</h1>
+      <p class="lead">
+        Konfigurasi jaringan dan routing menggunakan router MikroTik untuk kebutuhan lab jaringan sekolah, mencakup pengaturan IP, firewall dasar, dan manajemen bandwidth antar client.
+      </p>
+    </div>
+
+    <!-- METADATA PROYEK -->
+    <div class="meta-grid">
+      <div class="card meta-card">
+        <h4>Peran</h4>
+        <p>Konfigurasi & Troubleshooting</p>
+      </div>
+
+      <div class="card meta-card">
+        <h4>Durasi</h4>
+        <p>1 bulan</p>
+      </div>
+
+      <div class="card meta-card">
+        <h4>Tahun</h4>
+        <p>2026</p>
+      </div>
+
+      <div class="card meta-card">
+        <h4>Status</h4>
+        <p>Selesai</p>
+      </div>
+    </div>
+
+    <!-- TENTANG PROYEK & YANG DIKERJAKAN -->
+    <div class="detail-two-col">
+      <div class="card">
+        <h2>Tentang Proyek</h2>
+        <p style="margin-bottom: 14px;">
+          Proyek ini berawal dari kebutuhan lab jaringan sekolah: client harus bisa saling terhubung, dapat IP otomatis, dan tetap bisa internetan tanpa satu perangkat pun menghabiskan seluruh bandwidth.
+        </p>
+        <p>
+          Router MikroTik dipakai sebagai pusat jaringan — mengatur alamat IP, membagikan IP lewat DHCP, meneruskan trafik ke internet lewat NAT, memfilter trafik lewat firewall, dan membatasi bandwidth tiap client.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Yang Dikerjakan</h2>
+        <ul class="check-list">
+          <li>Pengalamatan IP & pembagian segmen jaringan lab</li>
+          <li>DHCP Server supaya client dapat IP otomatis</li>
+          <li>NAT (masquerade) untuk akses internet</li>
+          <li>Firewall dasar untuk mengamankan router dari akses yang tidak perlu</li>
+          <li>Simple Queue untuk manajemen bandwidth antar client</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PROSES PENGERJAAN -->
+    <div class="card detail-block">
+      <h2>Proses Pengerjaan</h2>
+      <div class="process-list">
+        <div class="process-step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Reset & akses awal router</h3>
+            <p>Menyiapkan router dari kondisi bersih, lalu masuk lewat Winbox untuk mulai konfigurasi.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Pengaturan IP Address</h3>
+            <p>Menentukan IP untuk interface WAN dan LAN sesuai rancangan jaringan lab.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>DHCP Server & DNS</h3>
+            <p>Membuat pool IP, mengaktifkan DHCP server, dan mengatur DNS agar client langsung bisa browsing.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">4</div>
+          <div>
+            <h3>NAT & Routing</h3>
+            <p>Menambahkan rule masquerade dan default route supaya trafik lab keluar ke internet.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">5</div>
+          <div>
+            <h3>Firewall & Bandwidth</h3>
+            <p>Menyusun rule firewall dasar dan Simple Queue, lalu menguji hasilnya dari beberapa client.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TANTANGAN & SOLUSI -->
+    <div class="detail-block">
+      <h2 style="margin-bottom: 16px;">Tantangan & Solusi</h2>
+      <div class="qa-grid">
+        <div class="card qa-item">
+          <h3>Client sudah dapat IP tapi tidak bisa internetan</h3>
+          <span class="qa-label">Solusi</span>
+          <p>Dicek bertahap dari gateway, DNS, sampai rule NAT — ternyata rule masquerade belum mengarah ke interface yang benar.</p>
+        </div>
+
+        <div class="card qa-item">
+          <h3>Bandwidth tidak merata antar client</h3>
+          <span class="qa-label">Solusi</span>
+          <p>Diatasi dengan Simple Queue agar tiap client mendapat jatah yang adil.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HASIL, YANG DIPELAJARI & TOOLS -->
+    <div class="detail-two-col">
+      <div class="card">
+        <h2>Hasil</h2>
+        <ul class="check-list">
+          <li>Seluruh client lab terhubung & dapat internet stabil</li>
+          <li>Bandwidth terbagi lebih merata</li>
+          <li>Dokumentasi konfigurasi bisa dipakai ulang untuk praktik berikutnya</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Yang Dipelajari</h2>
+        <ul class="check-list">
+          <li>Alur kerja jaringan dari IP, DHCP, NAT sampai firewall</li>
+          <li>Cara troubleshooting jaringan secara berurutan</li>
+          <li>Dasar-dasar persiapan sertifikasi MikroTik (MTCNA)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Tools & Teknologi</h2>
+      <div class="mini-tags" style="margin-top: 12px;">
+        <span class="tag">MikroTik</span>
+        <span class="tag">Winbox</span>
+        <span class="tag">Routing</span>
+        <span class="tag">Firewall</span>
+        <span class="tag">Bandwidth Management</span>
+      </div>
+    </div>
+
+    <!-- NAVIGASI KIRI BAWAH & KANAN BAWAH -->
+    <div class="detail-bottom-nav">
+      <button type="button" class="btn btn-outline back-to-home-btn">
+        ← Kembali ke Portofolio
+      </button>
+
+      <a href="#kontrol-led-arduino" class="btn btn-primary">
+        Kontrol LED Arduino →
+      </a>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="container">
+    © <span id="year"></span> Yusuf Aliefiano.
+    Dibuat dengan HTML, CSS & JavaScript.
+  </div>
+</footer>
+
+<script>
+// TAHUN OTOMATIS
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// MODE TERANG & GELAP (DENGAN PENYIMPANAN OTOMATIS)
+const themeToggle = document.getElementById("themeToggle");
+const rootElement = document.documentElement;
+
+const savedTheme = localStorage.getItem("portfolio-theme");
+if (savedTheme === "light") {
+  rootElement.setAttribute("data-theme", "light");
+  themeToggle.textContent = "🌙";
+}
+
+themeToggle.addEventListener("click", () => {
+  const currentTheme = rootElement.getAttribute("data-theme");
+  if (currentTheme === "light") {
+    rootElement.removeAttribute("data-theme");
+    themeToggle.textContent = "☀️";
+    localStorage.setItem("portfolio-theme", "dark");
+  } else {
+    rootElement.setAttribute("data-theme", "light");
+    themeToggle.textContent = "🌙";
+    localStorage.setItem("portfolio-theme", "light");
+  }
+});
+
+// MENU HAMBURGER (GARIS TIGA)
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+function closeNavMenu() {
+  navLinks.classList.remove("open");
+  menuToggle.classList.remove("active");
+  menuToggle.setAttribute("aria-expanded", "false");
+}
+
+menuToggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+  const isOpen = navLinks.classList.toggle("open");
+  menuToggle.classList.toggle("active");
+  menuToggle.setAttribute("aria-expanded", isOpen);
+});
+
+document.addEventListener("click", (e) => {
+  if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+    closeNavMenu();
+  }
+});
+
+// NAVIGASI ANTAR HALAMAN (UTAMA <-> ARDUINO <-> KONFIGURASI MIKROTIK)
+const homeView = document.getElementById("homeView");
+const arduinoView = document.getElementById("arduinoView");
+const mikrotikView = document.getElementById("mikrotikView");
+const pageTitle = document.getElementById("pageTitle");
+const cardArduino = document.getElementById("cardArduino");
+const cardMikrotik = document.getElementById("cardMikrotik");
+
+function showDetailPage(pageKey, updateHash = true) {
+  homeView.classList.add("hidden");
+  arduinoView.classList.add("hidden");
+  mikrotikView.classList.add("hidden");
+
+  if (pageKey === "arduino") {
+    arduinoView.classList.remove("hidden");
+    pageTitle.textContent = "Kontrol LED Arduino | Yusuf Aliefiano";
+    if (updateHash && window.location.hash !== "#kontrol-led-arduino") {
+      history.pushState({ page: "arduino" }, "", "#kontrol-led-arduino");
+    }
+  } else if (pageKey === "mikrotik") {
+    mikrotikView.classList.remove("hidden");
+    pageTitle.textContent = "Konfigurasi MikroTik | Yusuf Aliefiano";
+    if (updateHash && window.location.hash !== "#konfigurasi-mikrotik") {
+      history.pushState({ page: "mikrotik" }, "", "#konfigurasi-mikrotik");
+    }
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  closeNavMenu();
+}
+
+function showHomePage(sectionSelector = null, updateHash = true) {
+  arduinoView.classList.add("hidden");
+  mikrotikView.classList.add("hidden");
+  homeView.classList.remove("hidden");
+  pageTitle.textContent = "Yusuf Aliefiano | Portofolio";
+
+  document.querySelectorAll("#homeView .reveal").forEach(el => el.classList.add("show"));
+
+  if (updateHash && !sectionSelector && (window.location.hash === "#konfigurasi-mikrotik" || window.location.hash === "#kontrol-led-arduino")) {
+    history.pushState({ page: "home" }, "", "#beranda");
+  }
+
+  closeNavMenu();
+
+  if (sectionSelector) {
+    setTimeout(() => {
+      const target = document.querySelector(sectionSelector);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 30);
+  } else {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+// Event kartu Kontrol LED Arduino
+cardArduino.addEventListener("click", () => showDetailPage("arduino", true));
+cardArduino.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    showDetailPage("arduino", true);
+  }
+});
+
+// Event kartu Konfigurasi MikroTik
+cardMikrotik.addEventListener("click", () => showDetailPage("mikrotik", true));
+cardMikrotik.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    showDetailPage("mikrotik", true);
+  }
+});
+
+// Tombol kembali ke portofolio di kedua halaman detail
+document.querySelectorAll(".back-to-home-btn").forEach(btn => {
+  btn.addEventListener("click", () => showHomePage("#proyek", true));
+});
+
+// Link ke halaman detail
+document.querySelectorAll('a[href="#kontrol-led-arduino"]').forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    showDetailPage("arduino", true);
+  });
+});
+
+document.querySelectorAll('a[href="#konfigurasi-mikrotik"]').forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    showDetailPage("mikrotik", true);
+  });
+});
+
+// Link ke section halaman utama & logo
+document.querySelectorAll("#navLinks a[data-section], .logo").forEach(link => {
+  link.addEventListener("click", (e) => {
+    const href = link.getAttribute("href");
+    if (href && href.startsWith("#")) {
+      e.preventDefault();
+      showHomePage(href, false);
+      history.pushState({ page: "home" }, "", href);
+    }
+  });
+});
+
+// Navigasi tombol Back/Forward browser
+function handleHashNavigation() {
+  if (window.location.hash === "#kontrol-led-arduino") {
+    showDetailPage("arduino", false);
+  } else if (window.location.hash === "#konfigurasi-mikrotik") {
+    showDetailPage("mikrotik", false);
+  } else {
+    showHomePage(null, false);
+  }
+}
+
+window.addEventListener("popstate", handleHashNavigation);
+handleHashNavigation();
+
+// ANIMASI SCROLL BERTAHAP (STAGGERED REVEAL)
+const revealElements = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add("show");
+      }, index * 100);
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.12
+});
+
+revealElements.forEach(element => {
+  observer.observe(element);
+});
+</script>
+
 </body>
-  </html>
-  
+</html>
