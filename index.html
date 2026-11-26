@@ -269,8 +269,7 @@ nav {
 .hero {
   min-height: 82vh;
   display: grid;
-  grid-template-columns: 1.25fr .75fr;
-  gap: 50px;
+  grid-template-columns: 1fr;
   align-items: center;
   padding: 75px 0;
 }
@@ -320,7 +319,7 @@ h1 span {
 
 .hero p {
   color: var(--muted);
-  max-width: 600px;
+  max-width: 680px;
   font-size: 1.05rem;
   animation: fadeUp 1.05s ease forwards;
 }
@@ -384,31 +383,6 @@ h1 span {
 .btn-outline:hover {
   border-color: var(--accent);
   color: var(--accent);
-}
-
-/* PROFILE CARD DENGAN ANIMASI FLOATING */
-.profile-card {
-  padding: 28px;
-  border-radius: 24px;
-  border: 1px solid var(--border);
-  background: var(--panel);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-card);
-  animation: floatCard 5s ease-in-out infinite;
-  transition: border-color 0.4s, background 0.35s ease, box-shadow 0.35s ease;
-}
-
-.profile-card:hover {
-  border-color: var(--accent);
-}
-
-@keyframes floatCard {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-.profile-card p {
-  color: var(--muted);
 }
 
 .mini-tags {
@@ -476,13 +450,31 @@ section:not(.hero) {
   gap: 22px;
 }
 
+/* TENTANG SAYA: SUSUNAN KE BAWAH (1. FOTO -> 2. NAMA -> 3. PROFIL SINGKAT) */
 .about-grid {
-  grid-template-columns: 1.2fr .8fr;
+  grid-template-columns: 1fr;
+  max-width: 720px;
+}
+
+.about-photo-card {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-photo-card img {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  border-radius: 14px;
+  display: block;
 }
 
 .facts {
   display: grid;
   gap: 14px;
+  align-content: center;
 }
 
 .fact {
@@ -521,6 +513,18 @@ section:not(.hero) {
   transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
 }
 
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-card.clickable,
 .project-card.clickable {
   cursor: pointer;
 }
@@ -586,7 +590,7 @@ section:not(.hero) {
   margin-top: 16px;
 }
 
-/* HALAMAN DETAIL PROYEK (ARDUINO & MIKROTIK) */
+/* HALAMAN DETAIL PROYEK & KEAHLIAN */
 .detail-page {
   padding: 52px 0 90px;
 }
@@ -666,9 +670,13 @@ section:not(.hero) {
   font-weight: bold;
 }
 
+.check-list strong {
+  color: var(--text);
+}
+
 .process-list {
   display: grid;
-  gap: 16px;
+  gap: 22px;
 }
 
 .process-step {
@@ -694,7 +702,7 @@ section:not(.hero) {
 
 .process-step h3 {
   font-size: 1.1rem;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .qa-grid {
@@ -723,7 +731,7 @@ section:not(.hero) {
   margin-bottom: 4px;
 }
 
-/* TOMBOL NAVIGASI BAWAH (KIRI BAWAH KEMBALI & KANAN BAWAH NYAMBUNG PROYEK) */
+/* TOMBOL NAVIGASI BAWAH */
 .detail-bottom-nav {
   display: flex;
   justify-content: space-between;
@@ -792,12 +800,6 @@ footer {
 }
 
 @media(max-width:760px) {
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 35px;
-  }
-
-  .about-grid,
   .skills-grid,
   .projects-grid,
   .detail-two-col,
@@ -814,6 +816,11 @@ footer {
 @media(max-width:480px) {
   .meta-grid {
     grid-template-columns: 1fr;
+  }
+
+  .process-step {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .detail-bottom-nav {
@@ -910,17 +917,6 @@ footer {
         </a>
       </div>
     </div>
-
-    <aside class="profile-card">
-      <h2>Yusuf Aliefiano</h2>
-      <p>Pelajar • TJKT</p>
-
-      <div class="mini-tags">
-        <span class="tag">Networking</span>
-        <span class="tag">HTML & CSS</span>
-        <span class="tag">Arduino</span>
-      </div>
-    </aside>
   </section>
 
   <!-- TENTANG -->
@@ -938,16 +934,12 @@ footer {
 
       <div class="about-grid">
 
-        <div class="card reveal">
-          <h3>Profil Singkat</h3>
-          <p style="margin-top: 10px;">
-            Saya adalah pelajar jurusan Teknik Jaringan Komputer
-            dan Telekomunikasi (TJKT). Saya tertarik mempelajari
-            jaringan komputer, perangkat keras, mikrokontroler,
-            dan pemrograman website.
-          </p>
+        <!-- 1. FOTO -->
+        <div class="card about-photo-card reveal">
+          <img src="foto-yusuf.jpg" alt="Foto Yusuf Aliefiano">
         </div>
 
+        <!-- 2. NAMA -->
         <div class="card facts reveal">
           <div class="fact">
             <span>Nama</span>
@@ -970,6 +962,17 @@ footer {
           </div>
         </div>
 
+        <!-- 3. PROFIL SINGKAT -->
+        <div class="card reveal">
+          <h3>Profil Singkat</h3>
+          <p style="margin-top: 10px;">
+            Saya adalah pelajar jurusan Teknik Jaringan Komputer
+            dan Telekomunikasi (TJKT). Saya tertarik mempelajari
+            jaringan komputer, perangkat keras, mikrokontroler,
+            dan pemrograman website.
+          </p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -988,31 +991,28 @@ footer {
 
       <div class="skills-grid">
 
-        <article class="card skill-card reveal">
-          <div class="icon">🌐</div>
-          <h3>Jaringan Komputer</h3>
-          <p>
-            Mempelajari IP Address, konfigurasi perangkat,
-            dan troubleshooting jaringan.
-          </p>
+        <article class="card skill-card clickable reveal" id="cardSkillNetwork" tabindex="0" role="button" aria-label="Buka halaman detail Jaringan Komputer">
+          <div>
+            <div class="icon">🌐</div>
+            <h3>Jaringan Komputer</h3>
+          </div>
+          <a href="#jaringan-komputer" class="project-link-btn">Pelajari Selengkapnya →</a>
         </article>
 
-        <article class="card skill-card reveal">
-          <div class="icon">💻</div>
-          <h3>Web Development</h3>
-          <p>
-            Mempelajari HTML dan CSS untuk membuat
-            halaman website.
-          </p>
+        <article class="card skill-card clickable reveal" id="cardSkillWeb" tabindex="0" role="button" aria-label="Buka halaman detail Web Development">
+          <div>
+            <div class="icon">💻</div>
+            <h3>Web Development</h3>
+          </div>
+          <a href="#web-development" class="project-link-btn">Pelajari Selengkapnya →</a>
         </article>
 
-        <article class="card skill-card reveal">
-          <div class="icon">🔌</div>
-          <h3>Mikrokontroler</h3>
-          <p>
-            Mengenal Arduino, sensor HC-SR04,
-            dan pemrograman LED.
-          </p>
+        <article class="card skill-card clickable reveal" id="cardSkillMicro" tabindex="0" role="button" aria-label="Buka halaman detail Mikrokontroler">
+          <div>
+            <div class="icon">🔌</div>
+            <h3>Mikrokontroler</h3>
+          </div>
+          <a href="#mikrokontroler" class="project-link-btn">Pelajari Selengkapnya →</a>
         </article>
 
       </div>
@@ -1049,7 +1049,7 @@ footer {
             Proyek sensor jarak berbasis Arduino yang membaca jarak objek menggunakan sensor ultrasonik HC-SR04, lalu menampilkan hasilnya secara real-time.
           </p>
 
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 16px;">
             <span class="tag" style="margin-top: 0;">Arduino • HC-SR04</span>
             <a href="#kontrol-led-arduino" class="project-link-btn" style="margin-top: 0;">Buka Detail →</a>
           </div>
@@ -1071,7 +1071,7 @@ footer {
             Konfigurasi jaringan dan routing menggunakan router MikroTik untuk kebutuhan lab jaringan sekolah, mencakup pengaturan IP, firewall dasar, dan manajemen bandwidth antar client.
           </p>
 
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 16px;">
             <span class="tag" style="margin-top: 0;">Networking • MikroTik</span>
             <a href="#konfigurasi-mikrotik" class="project-link-btn" style="margin-top: 0;">Buka Detail →</a>
           </div>
@@ -1118,6 +1118,229 @@ footer {
     </div>
   </section>
 
+</div>
+
+<!-- ==================== HALAMAN KEAHLIAN 1: JARINGAN KOMPUTER ==================== -->
+<div id="networkSkillView" class="detail-page hidden">
+  <div class="container">
+
+    <div class="detail-hero">
+      <button type="button" class="btn btn-outline back-to-skills-btn">
+        ← Kembali ke Portofolio
+      </button>
+
+      <h1>Jaringan Komputer</h1>
+      <p class="lead">
+        Jaringan komputer adalah sistem yang menghubungkan dua atau lebih perangkat komputasi—seperti komputer, laptop, ponsel, server, atau printer—melalui media kabel maupun nirkabel untuk saling berkomunikasi, bertukar data, dan berbagi sumber daya menggunakan aturan komunikasi (protokol).
+      </p>
+    </div>
+
+    <!-- FUNGSI UTAMA JARINGAN KOMPUTER -->
+    <div class="card detail-block">
+      <h2>Fungsi Utama Jaringan Komputer dan Manfaatnya</h2>
+      <p style="margin-bottom: 22px;">
+        Fungsi utama jaringan komputer adalah memungkinkan beberapa perangkat saling terhubung untuk berbagi sumber daya, bertukar data, dan berkomunikasi secara efisien.
+      </p>
+
+      <div class="process-list">
+        <div class="process-step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Berbagi Sumber Daya (Resource Sharing)</h3>
+            <ul class="check-list">
+              <li><strong>Perangkat keras (hardware):</strong> Beberapa komputer dapat memakai satu printer, scanner, atau media penyimpanan (NAS) secara bersama-sama tanpa perlu membeli alat untuk setiap komputer.</li>
+              <li><strong>Koneksi internet:</strong> Satu jaringan internet utama (misalnya dari satu router Wi-Fi) dapat dibagikan ke banyak ponsel, laptop, dan perangkat lain sekaligus.</li>
+              <li><strong>Perangkat lunak (software):</strong> Aplikasi atau sistem tertentu dapat dipasang di server pusat lalu diakses oleh banyak pengguna secara bersamaan.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Pertukaran dan Akses Data (Data Sharing)</h3>
+            <ul class="check-list">
+              <li><strong>Transfer file cepat:</strong> Pengguna dapat mengirim dokumen, foto, atau video antarperangkat secara langsung lewat jaringan lokal maupun internet tanpa memakai flashdisk.</li>
+              <li><strong>Penyimpanan terpusat:</strong> Data penting dapat disimpan di satu server atau cloud sehingga mudah diakses oleh tim yang berwenang dari mana saja.</li>
+              <li><strong>Sinkronisasi data:</strong> Perubahan pada data (seperti stok barang di kasir atau dokumen kerja bersama) langsung diperbarui secara real-time untuk semua pengguna yang terhubung.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Komunikasi dan Kolaborasi</h3>
+            <ul class="check-list">
+              <li><strong>Komunikasi instan:</strong> Mendukung pengiriman pesan teks (email, chat), panggilan suara (VoIP), hingga konferensi video (video call).</li>
+              <li><strong>Kerja jarak jauh (remote work):</strong> Memungkinkan karyawan atau pelajar mengakses sistem kantor, kampus, maupun ruang kelas daring dari lokasi berbeda.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">4</div>
+          <div>
+            <h3>Efisiensi Biaya dan Pengelolaan</h3>
+            <ul class="check-list">
+              <li><strong>Menghemat anggaran:</strong> Berbagi perangkat keras, lisensi perangkat lunak, dan penyimpanan terpusat menekan biaya pembelian serta perawatan.</li>
+              <li><strong>Manajemen terpusat:</strong> Administrator jaringan dapat mengatur pembaruan sistem, mencadangkan data (backup), dan memantau seluruh perangkat dari satu pusat kendali.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">5</div>
+          <div>
+            <h3>Keamanan dan Kontrol Akses</h3>
+            <ul class="check-list">
+              <li><strong>Pembatasan hak akses:</strong> Pemilik jaringan dapat menentukan siapa saja yang boleh melihat, mengubah, atau menghapus data tertentu.</li>
+              <li><strong>Perlindungan data:</strong> Jaringan memudahkan penerapan firewall, enkripsi, dan pencadangan rutin agar data tetap aman dari kerusakan perangkat maupun akses tidak sah.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-two-col">
+      <div class="card">
+        <h2>Materi yang Dipelajari</h2>
+        <ul class="check-list">
+          <li>Pengalamatan IP (IPv4), Subnetting, dan Gateway</li>
+          <li>Konfigurasi Router MikroTik (DHCP, NAT, Firewall, Simple Queue)</li>
+          <li>Media transmisi kabel (UTP/RJ45) dan nirkabel (Wi-Fi/Access Point)</li>
+          <li>Protokol komunikasi jaringan seperti TCP/IP, DNS, HTTP/HTTPS</li>
+          <li>Troubleshooting koneksi dan pengujian jaringan</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Perangkat & Tools</h2>
+        <div class="mini-tags" style="margin-top: 12px;">
+          <span class="tag">MikroTik</span>
+          <span class="tag">Winbox</span>
+          <span class="tag">Cisco Packet Tracer</span>
+          <span class="tag">TCP/IP</span>
+          <span class="tag">UTP & Crimping</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-bottom-nav">
+      <button type="button" class="btn btn-outline back-to-skills-btn">
+        ← Kembali ke Portofolio
+      </button>
+
+      <a href="#web-development" class="btn btn-primary">
+        Web Development →
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== HALAMAN KEAHLIAN 2: WEB DEVELOPMENT ==================== -->
+<div id="webSkillView" class="detail-page hidden">
+  <div class="container">
+
+    <div class="detail-hero">
+      <button type="button" class="btn btn-outline back-to-skills-btn">
+        ← Kembali ke Portofolio
+      </button>
+
+      <h1>Web Development</h1>
+      <p class="lead">
+        Web development adalah proses merancang, membangun, dan memelihara halaman maupun aplikasi berbasis web agar dapat diakses melalui peramban (browser) dengan tampilan yang responsif dan interaktif.
+      </p>
+    </div>
+
+    <div class="detail-two-col">
+      <div class="card">
+        <h2>Materi yang Dipelajari</h2>
+        <ul class="check-list">
+          <li>Struktur dokumen semantik menggunakan HTML5</li>
+          <li>Pengaturan tata letak modern dengan CSS Grid dan Flexbox</li>
+          <li>Desain responsif agar rapi di layar laptop maupun ponsel</li>
+          <li>Interaktivitas dasar halaman menggunakan JavaScript (DOM)</li>
+          <li>Publikasi website statis menggunakan GitHub Pages</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Perangkat & Tools</h2>
+        <div class="mini-tags" style="margin-top: 12px;">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">VS Code</span>
+          <span class="tag">GitHub Pages</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-bottom-nav">
+      <button type="button" class="btn btn-outline back-to-skills-btn">
+        ← Kembali ke Portofolio
+      </button>
+
+      <a href="#mikrokontroler" class="btn btn-primary">
+        Mikrokontroler →
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== HALAMAN KEAHLIAN 3: MIKROKONTROLER ==================== -->
+<div id="microSkillView" class="detail-page hidden">
+  <div class="container">
+
+    <div class="detail-hero">
+      <button type="button" class="btn btn-outline back-to-skills-btn">
+        ← Kembali ke Portofolio
+      </button>
+
+      <h1>Mikrokontroler</h1>
+      <p class="lead">
+        Mikrokontroler adalah komputer berukuran kecil dalam satu chip terpadu yang dirancang untuk mengendalikan perangkat elektronik, membaca input dari sensor, dan menggerakkan aktuator seperti LED atau motor secara otomatis.
+      </p>
+    </div>
+
+    <div class="detail-two-col">
+      <div class="card">
+        <h2>Materi yang Dipelajari</h2>
+        <ul class="check-list">
+          <li>Pengenalan papan mikrokontroler Arduino Uno dan pin I/O</li>
+          <li>Pembacaan data jarak menggunakan sensor ultrasonik HC-SR04</li>
+          <li>Pengendalian indikator LED dan komponen output digital</li>
+          <li>Penulisan logika pemrograman mikrokontroler berbasis C/C++</li>
+          <li>Perakitan rangkaian elektronika dasar pada breadboard</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Perangkat & Tools</h2>
+        <div class="mini-tags" style="margin-top: 12px;">
+          <span class="tag">Arduino Uno</span>
+          <span class="tag">Arduino IDE</span>
+          <span class="tag">Sensor HC-SR04</span>
+          <span class="tag">C++</span>
+          <span class="tag">Breadboard</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-bottom-nav">
+      <button type="button" class="btn btn-outline back-to-skills-btn">
+        ← Kembali ke Portofolio
+      </button>
+
+      <a href="#jaringan-komputer" class="btn btn-primary">
+        Jaringan Komputer →
+      </a>
+    </div>
+
+  </div>
 </div>
 
 <!-- ==================== HALAMAN KHUSUS KONTROL LED ARDUINO ==================== -->
@@ -1506,18 +1729,44 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// NAVIGASI ANTAR HALAMAN (UTAMA <-> ARDUINO <-> KONFIGURASI MIKROTIK)
+// NAVIGASI ANTAR HALAMAN (UTAMA <-> KEAHLIAN <-> PROYEK)
 const homeView = document.getElementById("homeView");
+const networkSkillView = document.getElementById("networkSkillView");
+const webSkillView = document.getElementById("webSkillView");
+const microSkillView = document.getElementById("microSkillView");
 const arduinoView = document.getElementById("arduinoView");
 const mikrotikView = document.getElementById("mikrotikView");
 const pageTitle = document.getElementById("pageTitle");
+
+const cardSkillNetwork = document.getElementById("cardSkillNetwork");
+const cardSkillWeb = document.getElementById("cardSkillWeb");
+const cardSkillMicro = document.getElementById("cardSkillMicro");
 const cardArduino = document.getElementById("cardArduino");
 const cardMikrotik = document.getElementById("cardMikrotik");
 
+const allViews = [
+  homeView,
+  networkSkillView,
+  webSkillView,
+  microSkillView,
+  arduinoView,
+  mikrotikView
+];
+
+const detailHashes = [
+  "#kontrol-led-arduino",
+  "#konfigurasi-mikrotik",
+  "#jaringan-komputer",
+  "#web-development",
+  "#mikrokontroler"
+];
+
+function hideAllViews() {
+  allViews.forEach(view => view.classList.add("hidden"));
+}
+
 function showDetailPage(pageKey, updateHash = true) {
-  homeView.classList.add("hidden");
-  arduinoView.classList.add("hidden");
-  mikrotikView.classList.add("hidden");
+  hideAllViews();
 
   if (pageKey === "arduino") {
     arduinoView.classList.remove("hidden");
@@ -1531,6 +1780,24 @@ function showDetailPage(pageKey, updateHash = true) {
     if (updateHash && window.location.hash !== "#konfigurasi-mikrotik") {
       history.pushState({ page: "mikrotik" }, "", "#konfigurasi-mikrotik");
     }
+  } else if (pageKey === "network-skill") {
+    networkSkillView.classList.remove("hidden");
+    pageTitle.textContent = "Jaringan Komputer | Yusuf Aliefiano";
+    if (updateHash && window.location.hash !== "#jaringan-komputer") {
+      history.pushState({ page: "network-skill" }, "", "#jaringan-komputer");
+    }
+  } else if (pageKey === "web-skill") {
+    webSkillView.classList.remove("hidden");
+    pageTitle.textContent = "Web Development | Yusuf Aliefiano";
+    if (updateHash && window.location.hash !== "#web-development") {
+      history.pushState({ page: "web-skill" }, "", "#web-development");
+    }
+  } else if (pageKey === "micro-skill") {
+    microSkillView.classList.remove("hidden");
+    pageTitle.textContent = "Mikrokontroler | Yusuf Aliefiano";
+    if (updateHash && window.location.hash !== "#mikrokontroler") {
+      history.pushState({ page: "micro-skill" }, "", "#mikrokontroler");
+    }
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1538,14 +1805,13 @@ function showDetailPage(pageKey, updateHash = true) {
 }
 
 function showHomePage(sectionSelector = null, updateHash = true) {
-  arduinoView.classList.add("hidden");
-  mikrotikView.classList.add("hidden");
+  hideAllViews();
   homeView.classList.remove("hidden");
   pageTitle.textContent = "Yusuf Aliefiano | Portofolio";
 
   document.querySelectorAll("#homeView .reveal").forEach(el => el.classList.add("show"));
 
-  if (updateHash && !sectionSelector && (window.location.hash === "#konfigurasi-mikrotik" || window.location.hash === "#kontrol-led-arduino")) {
+  if (updateHash && !sectionSelector && detailHashes.includes(window.location.hash)) {
     history.pushState({ page: "home" }, "", "#beranda");
   }
 
@@ -1563,41 +1829,50 @@ function showHomePage(sectionSelector = null, updateHash = true) {
   }
 }
 
-// Event kartu Kontrol LED Arduino
-cardArduino.addEventListener("click", () => showDetailPage("arduino", true));
-cardArduino.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" || e.key === " ") {
-    e.preventDefault();
-    showDetailPage("arduino", true);
-  }
+function bindCardNavigation(element, pageKey) {
+  element.addEventListener("click", () => showDetailPage(pageKey, true));
+  element.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      showDetailPage(pageKey, true);
+    }
+  });
+}
+
+// Event kartu Keahlian
+bindCardNavigation(cardSkillNetwork, "network-skill");
+bindCardNavigation(cardSkillWeb, "web-skill");
+bindCardNavigation(cardSkillMicro, "micro-skill");
+
+// Event kartu Proyek
+bindCardNavigation(cardArduino, "arduino");
+bindCardNavigation(cardMikrotik, "mikrotik");
+
+// Tombol kembali ke portofolio (bagian Keahlian)
+document.querySelectorAll(".back-to-skills-btn").forEach(btn => {
+  btn.addEventListener("click", () => showHomePage("#keahlian", true));
 });
 
-// Event kartu Konfigurasi MikroTik
-cardMikrotik.addEventListener("click", () => showDetailPage("mikrotik", true));
-cardMikrotik.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" || e.key === " ") {
-    e.preventDefault();
-    showDetailPage("mikrotik", true);
-  }
-});
-
-// Tombol kembali ke portofolio di kedua halaman detail
+// Tombol kembali ke portofolio (bagian Proyek)
 document.querySelectorAll(".back-to-home-btn").forEach(btn => {
   btn.addEventListener("click", () => showHomePage("#proyek", true));
 });
 
-// Link ke halaman detail
-document.querySelectorAll('a[href="#kontrol-led-arduino"]').forEach(link => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-    showDetailPage("arduino", true);
-  });
-});
+// Link ke halaman detail Keahlian & Proyek
+const linkRoutes = {
+  "#jaringan-komputer": "network-skill",
+  "#web-development": "web-skill",
+  "#mikrokontroler": "micro-skill",
+  "#kontrol-led-arduino": "arduino",
+  "#konfigurasi-mikrotik": "mikrotik"
+};
 
-document.querySelectorAll('a[href="#konfigurasi-mikrotik"]').forEach(link => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-    showDetailPage("mikrotik", true);
+Object.entries(linkRoutes).forEach(([hash, pageKey]) => {
+  document.querySelectorAll(`a[href="${hash}"]`).forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      showDetailPage(pageKey, true);
+    });
   });
 });
 
@@ -1615,10 +1890,9 @@ document.querySelectorAll("#navLinks a[data-section], .logo").forEach(link => {
 
 // Navigasi tombol Back/Forward browser
 function handleHashNavigation() {
-  if (window.location.hash === "#kontrol-led-arduino") {
-    showDetailPage("arduino", false);
-  } else if (window.location.hash === "#konfigurasi-mikrotik") {
-    showDetailPage("mikrotik", false);
+  const hash = window.location.hash;
+  if (linkRoutes[hash]) {
+    showDetailPage(linkRoutes[hash], false);
   } else {
     showHomePage(null, false);
   }
